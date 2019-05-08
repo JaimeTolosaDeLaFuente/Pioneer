@@ -2,6 +2,10 @@
 import rospy
 import sys
 from std_msgs.msg import String
+import speech_recognition as sr
+from gtts import gTTS
+import pyglet
+import os 
 
 # TODO: Add goals id
 goals = ["Goal1", "Goal2","Goal3"]
@@ -10,6 +14,35 @@ goals = ["Goal1", "Goal2","Goal3"]
 # TODO: Create the publisher to publish the topic with the next goal
 pub = rospy.Publisher('/rosarnl_node/goalname', String, queue_size=10)
 
+def inicia_micro():
+	r = sr.Recognizer()
+	with sr.Microphone() as source:
+    	print("Say something!")
+    	audio = r.listen(source)
+
+def escucha_micro():
+	audio = ''
+	while audio == '':
+		try:
+	    # for testing purposes, we're just using the default API key
+	    # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+	    # instead of `r.recognize_google(audio)`
+	    	audio = r.recognize_google(audio)
+		except sr.UnknownValueError:
+	    	speak('I dont understand you ')
+		except sr.RequestError as e:
+	    	print("Could not request results from Google Speech Recognition service; {0}".format(e))
+	return audio
+def speak(text):
+	tts = gTTS(text)
+	filename = '/tmp/temp.mp3'
+	tts.save(filename)
+
+	music = pyglet.media.load(filename,streaming = False)
+	music.play()
+
+	sleep(music.duration)
+	os.remove(filename)
 
 def state_callback(data):
 	global goals
@@ -25,6 +58,8 @@ def state_callback(data):
 
 def main():
 	global goals
+
+	inicia_micro()
 	# Initialise node gain_controller
 	rospy.init_node('rosarnl_tourgoals_node', anonymous=True)
 
@@ -33,8 +68,9 @@ def main():
 	# TODO: Subscribe to the robot planner state
 	rospy.Subscriber('rosarnl_node/arnl_path_state', String, state_callback)
 
+	text = escucha_micro()
 	# TODO: Send the robot to the first goal
-	pub.publish(goals.pop(0))
+	pub.publish(text)
 
 	# Return control to ROS
 	rospy.spin()
