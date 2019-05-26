@@ -46,6 +46,16 @@ def say_comprension_callback():
 def say_navigation_callback(text):
     speak(text)
 
+def speak(text):
+	tts = gTTS(text)
+	filename = '/tmp/temp.mp3'
+	tts.save(filename)
+	#print('HABLA JO PUTA')
+	music = pyglet.media.load(filename)
+	music.play()
+
+	time.sleep(music.duration)
+	os.remove(filename)
 
 
 def main():
