@@ -28,9 +28,6 @@ def navigation_callback(data):
         pub.publish(data)
         pub.speak('Go to '+data)
 
-
-
-
 def main():
 
     global rospy
