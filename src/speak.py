@@ -8,15 +8,8 @@ import pyglet
 import os
 import time
 from scipy.io import wavfile
-import pygame
+from pygame import mixer
 from rosarnl.srv import *
-#faces
-import pcl
-import struct
-import ctypes
-
-from sensor_msgs.msg import PointCloud, PointCloud2, PointField
-import sensor_msgs.point_cloud2 as pc2
 
 
 signal = False
@@ -50,9 +43,10 @@ def speak(text):
 	tts = gTTS(text)
 	filename = '/tmp/temp.mp3'
 	tts.save(filename)
-	#print('HABLA JO PUTA')
-	music = pyglet.media.load(filename)
-	music.play()
+	
+	mixer.init()
+	mixer.music.load(filename)
+	mixer.music.play()
 
 	time.sleep(music.duration)
 	os.remove(filename)
@@ -71,14 +65,8 @@ def main():
     rospy.Subscriber('system_status_node/say_comprension', Bool, say_comprension_callback)
     rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
 
-
-	while face:
-		text = escucha_micro()
-		understand(text)
-
-
 	#Return control to ROS
-	#rospy.spin()
+	rospy.spin()
 
 if __name__ == '__main__':
 	try:
