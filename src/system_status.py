@@ -8,7 +8,7 @@ import time
 
 state = True
 
-pub_speak = rospy.Publisher('/face', Bool, queue_size=10)
+pub_speak = rospy.Publisher('system_status_node/face', Bool, queue_size=10)
 
 
 def face_cloud_callback(data):
@@ -36,9 +36,9 @@ def main():
 
 	rospy.sleep(1)
     #Subscribe to the /face_detector/faces_cloud topic
-    rospy.Subscriber('/faces', Bool, face_cloud_callback)
-    rospy.Subscriber('/spek_stat', Bool, spek_stat_callback)
-    rospy.Subscriber('/comprension_stat', String, spek_stat_callback)
+    rospy.Subscriber('detection_node/faces', Bool, face_cloud_callback)
+    rospy.Subscriber('speak_node/spek_stat', Bool, spek_stat_callback)
+    rospy.Subscriber('comprension_node/comprension_stat', String, spek_stat_callback)
 
 	#Return control to ROS
 	rospy.spin()
