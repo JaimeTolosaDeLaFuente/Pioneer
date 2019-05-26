@@ -2,28 +2,26 @@
 
 
   <!-- System stat -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="system_status" pkg="Pionner_practica" type="system_status">
 
-  <!-- Face detection -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
 
   <!-- Detection -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="detection" pkg="Pionner_practica" type="detection">
 
   <!-- Speak -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="speak" pkg="Pionner_practica" type="speak">
 
   <!-- Speach recognition -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="speach_recognition" pkg="Pionner_practica" type="speach_recognition">
 
   <!-- Comprension -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="comprenssion" pkg="Pionner_practica" type="comprenssion">
 
   <!-- Navigation -->
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+  <node name="navigation" pkg="Pionner_practica" type="navigation">
 
 
- 
+
 
   <!--
   <node name="RosAria" pkg="rosaria" type="RosAria" args="_publish_aria_lasers:=true"
@@ -44,6 +42,14 @@
     output="screen">
       <remap from="/scan" to="/ar_lab5/laserscan_fixed" />
   </node>
+
+
+
+
+
+
+  <!-- Face detection -->
+  <node name="  " pkg="Pionner_practica" type="detection">
 
     -->
 </launch>
