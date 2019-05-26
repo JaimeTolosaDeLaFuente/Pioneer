@@ -41,10 +41,10 @@ def say_comprension_callback():
     #Cuando no entiende lo que has dicho
     print("Speak: No te he entendido, repite")
     speak("No te he entendido, repite")
+    pub_speach_recognition.publish(True)
 
-def say_navigation_callback():
-    print("Speak: He llegado al objetivo")
-    speak("He llegado al objetivo")
+def say_navigation_callback(text):
+    speak(text)
 
 
 
