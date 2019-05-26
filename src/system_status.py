@@ -8,7 +8,7 @@ import time
 
 state = True
 
-pub_speak = rospy.Publisher('/face', Bool, queue_size=10)
+pub_speak = rospy.Publisher('system_status_node/face', Bool, queue_size=10)
 
 
 def face_cloud_callback(data):

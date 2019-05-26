@@ -23,8 +23,8 @@ signal = False
 
 
 # Create the publisher to publish the topic with the next goal
-pub_speach_recognition = rospy.Publisher('/activate_speach_recognition', Bool, queue_size=10)
-pub_system_stat = rospy.Publisher('/speak_stat', Bool, queue_size=10)
+pub_speach_recognition = rospy.Publisher('speak_node/activate_speach_recognition', Bool, queue_size=10)
+pub_system_stat = rospy.Publisher('speak_node/speak_stat', Bool, queue_size=10)
 
 
 def face_callback(data):
@@ -59,7 +59,7 @@ def main():
 	rospy.Subscriber('/face', Bool, face_callback)
     rospy.Subscriber('/say_navigation', String, say_navigation_callback)
     rospy.Subscriber('/say_comprension', Bool, say_comprension_callback)
-    rospy.Subscriber('/speach_recognition_error', Bool, say_comprension_callback)
+    rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
 
 
 	while face:

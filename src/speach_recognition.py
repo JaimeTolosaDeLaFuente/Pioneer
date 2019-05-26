@@ -12,8 +12,8 @@ from rosarnl.srv import *
 
 
 # Create the publisher to publish the topic with the next goal
-pub_speach = rospy.Publisher('/activate_speach', String, queue_size=10)
-pub_error = rospy.Publisher('/speach_recognition_error', Bool, queue_size=10)
+pub_speach = rospy.Publisher('speach_recognition_node/activate_speach', String, queue_size=10)
+pub_error = rospy.Publisher('speach_recognition_node/speach_recognition_error', Bool, queue_size=10)
 
 
 

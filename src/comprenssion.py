@@ -20,11 +20,11 @@ black_board = ['Blackboard','blackboard','white board']
 
 
 
-pub_speak = rospy.Publisher('/rosarnl_node/goalname', String, queue_size=10)
+pub_speak = rospy.Publisher('/comprension_node/say_comprension', String, queue_size=10)
 
-pub_system_stat = rospy.Publisher('/rosarnl_node/goalname', String, queue_size=10)
+pub_system_stat = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
 
-pub_navigate = rospy.Publisher('/rosarnl_node/goalname', String, queue_size=10)
+pub_navigate = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
 
 def understand_callback(text):
 	if 'go to' in text:
@@ -57,7 +57,7 @@ def understand_callback(text):
 def main():
 	global rospy
 
-	rospy.init_node('rosarnl_tourgoals_node', anonymous=True)
+	rospy.init_node('comprension_node', anonymous=True)
 
 	rospy.sleep(1)
 
