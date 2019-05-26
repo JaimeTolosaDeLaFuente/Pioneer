@@ -26,7 +26,7 @@ def navigation_callback(data):
         rospy.ServiceProxy("/rosarnl_node/stop",Empty) #Debería de funcionar
     else:
         pub.publish(data)
-        pub.speak('Go to '+data)
+        pub.speak('Going to '+data)
 
 
 
