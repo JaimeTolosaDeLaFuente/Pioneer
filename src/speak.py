@@ -60,7 +60,7 @@ def main():
     #Podria ser bool, siempre que llama es por que no ha entiendido, valor transmitido inutil
     rospy.Subscriber('/say_comprension', Bool, say_comprension_callback)
     #Podria ser bool, siempre que llama es por que ha llegado al goal, valor transmitido inutil
-    rospy.Subscriber('/say_navigation', Bool, say_navigation_callback)
+    rospy.Subscriber('/say_navigation', String, say_navigation_callback)
 
 
 
