@@ -23,7 +23,7 @@
   <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
 
 
-
+ 
 
   <!--
   <node name="RosAria" pkg="rosaria" type="RosAria" args="_publish_aria_lasers:=true"
