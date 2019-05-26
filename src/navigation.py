@@ -24,17 +24,9 @@ def state_callback(data):
 def navigation_callback(data):
     if data == 'stop':
         rospy.ServiceProxy("/rosarnl_node/stop",Empty) #Debería de funcionar
-    elif data == 'door':
-        pub.publish('door')
-        pub_speak.publish('Go to the door')
-    elif len([elem for elem in black_board if elem in text]) != 0:
-        pub.publish('black_board')
-        pub_speak.publish('Go to the blackboard')
-    elif len([elem for elem in circle if elem in text]) != 0:
-        pub.publish('circle')
-        pub_speak.publish('Go to the circle')
-    elif data == 'hello':
-        pub_speak.publish('Hello bro')
+    else:
+        pub.publish(data)
+        pub.speak('Go to '+data)
 
 
 
