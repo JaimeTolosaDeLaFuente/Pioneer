@@ -1,0 +1,25 @@
+<launch>
+
+  <!-- TODO: Launch rosaria -->
+
+  <node name="RosAria" pkg="rosaria" type="RosAria" args="_publish_aria_lasers:=true"
+      output="screen">
+    <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
+  </node>
+
+  <!-- TODO: Launch laserscan_fix -->
+
+  <node name="laserscan_fix" pkg="ar_lab5" type="laserscan_fix"
+      output="log">
+    <remap from="sim_lms2xx_1_laserscan" to="/RosAria/sim_lms2xx_1_laserscan" />
+  </node>
+
+
+  <!-- TODO: Launch gmapping -->
+
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping"
+    output="screen">
+      <remap from="/scan" to="/ar_lab5/laserscan_fixed" />
+  </node>
+
+</launch>
