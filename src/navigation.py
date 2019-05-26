@@ -1,15 +1,15 @@
 import rospy
 import sys
-import os 
+import os
 import time
 import rosarnl.srv import *
 from std_msgs.msg import String
 from std_msgs.msg import Empty
-#from Pionner.msg import Navigate_Comprenssion 
+#from Pionner.msg import Navigate_Comprenssion
 
 
-pub = rospy.Publisher('/rosarnl_node/goalname',String,queue_size = 10)
-pub_speak = rospy.Publisher('speak_node/Say_Navigation',String,queue_size = 10)
+pub = rospy.Publisher('/navigation_node/goalname',String,queue_size = 10)
+pub_speak = rospy.Publisher('navigation_node/Say_Navigation',String,queue_size = 10)
 
 
 door=['door','work']
@@ -44,7 +44,7 @@ def main():
 
     rospy.Subscriber('comprenssion_node/Navigate_Comprenssion',Navigate_Comprenssion,navigation_callback)
     #Return control to Ros
-    rospy.spin()    
+    rospy.spin()
 
 if __name__ == '__main__':
 	try:
