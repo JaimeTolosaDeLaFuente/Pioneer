@@ -1,13 +1,36 @@
 <launch>
 
-  <!-- TODO: Launch rosaria -->
 
+  <!-- System stat -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Face detection -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Detection -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Speak -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Speach recognition -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Comprension -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+  <!-- Navigation -->
+  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping">
+
+
+ 
+
+  <!--
   <node name="RosAria" pkg="rosaria" type="RosAria" args="_publish_aria_lasers:=true"
       output="screen">
     <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
   </node>
 
-  <!-- TODO: Launch laserscan_fix -->
 
   <node name="laserscan_fix" pkg="ar_lab5" type="laserscan_fix"
       output="log">
@@ -15,11 +38,12 @@
   </node>
 
 
-  <!-- TODO: Launch gmapping -->
+
 
   <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping"
     output="screen">
       <remap from="/scan" to="/ar_lab5/laserscan_fixed" />
   </node>
 
+    -->
 </launch>
