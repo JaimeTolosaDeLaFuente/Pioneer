@@ -12,10 +12,6 @@ pub = rospy.Publisher('/navigation_node/goalname',String,queue_size = 10)
 pub_speak = rospy.Publisher('navigation_node/Say_Navigation',String,queue_size = 10)
 
 
-door=['door','work']
-circle=['center','circle']
-black_board = ['Blackboard','blackboard','white board']
-
 def state_callback(data):
     rospy.loginfo("ARNL path state: " + data.data)
 	if data.data == 'REACHED_GOAL':
