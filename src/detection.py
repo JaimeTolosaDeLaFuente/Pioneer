@@ -11,7 +11,7 @@ from sensor_msgs.msg import PointField
 #PointCloud, PointCloud2,
 
 # Create the publisher to publish the topic with the next goal
-pub = rospy.Publisher('/face', Bool, queue_size=10)
+pub = rospy.Publisher('detection_node/face', Bool, queue_size=10)
 
 detect = True
 

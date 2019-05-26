@@ -47,7 +47,7 @@ def main():
 	rospy.sleep(1)
 
 	#Subscribe to speak
-	rospy.Subscriber('/activate_speach_recognition', Bool, escucha_micro_callback)
+	rospy.Subscriber('speak_node/activate_speach_recognition', Bool, escucha_micro_callback)
 
 	rospy.spin()
 

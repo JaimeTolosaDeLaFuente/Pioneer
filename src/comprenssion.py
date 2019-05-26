@@ -61,7 +61,7 @@ def main():
 
 	rospy.sleep(1)
 
-	rospy.Subscriber('/activate_speach', String, understand_callback)
+	rospy.Subscriber('speach_recognition_node/activate_speach', String, understand_callback)
 
 	rospy.spin()
 
