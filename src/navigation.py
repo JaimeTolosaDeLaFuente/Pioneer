@@ -13,6 +13,7 @@ pub_speak = rospy.Publisher('navigation_node/Say_Navigation',String,queue_size =
 
 
 def state_callback(data):
+    
     rospy.loginfo("ARNL path state: " + data.data)
 	if data.data == 'REACHED_GOAL':
         pub_speak.publish('I stop')

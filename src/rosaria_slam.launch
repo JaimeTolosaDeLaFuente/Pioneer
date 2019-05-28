@@ -1,13 +1,13 @@
 <launch>
-
+  
 
   <!-- System stat -->
   <node name="system_status" pkg="Pionner_practica" type="system_status">
 
 
-  <!-- Detection -->
+  <!-- Detection 
   <node name="detection" pkg="Pionner_practica" type="detection">
-
+  -->
   <!-- Speak -->
   <node name="speak" pkg="Pionner_practica" type="speak">
 
@@ -19,37 +19,4 @@
 
   <!-- Navigation -->
   <node name="navigation" pkg="Pionner_practica" type="navigation">
-
-
-
-
-  <!--
-  <node name="RosAria" pkg="rosaria" type="RosAria" args="_publish_aria_lasers:=true"
-      output="screen">
-    <remap from="/RosAria/cmd_vel" to="/cmd_vel" />
-  </node>
-
-
-  <node name="laserscan_fix" pkg="ar_lab5" type="laserscan_fix"
-      output="log">
-    <remap from="sim_lms2xx_1_laserscan" to="/RosAria/sim_lms2xx_1_laserscan" />
-  </node>
-
-
-
-
-  <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping"
-    output="screen">
-      <remap from="/scan" to="/ar_lab5/laserscan_fixed" />
-  </node>
-
-
-
-
-
-
-  <!-- Face detection -->
-  <node name="  " pkg="Pionner_practica" type="detection">
-
-    -->
 </launch>

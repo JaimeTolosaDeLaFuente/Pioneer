@@ -27,30 +27,31 @@ pub_system_stat = rospy.Publisher('/comprension_node/goalname', String, queue_si
 pub_navigate = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
 
 def understand_callback(text):
-	if 'go to' in text:
-		if  len([elem for elem in door if elem in text]) != 0:
+	print(text)
+	if 'go to' in text.data:
+		if  len([elem for elem in door if elem in text.data]) != 0:
 			pub_navigate.publish('door')
-            pub_system_stat.publish(True)
+			pub_system_stat.publish(True)
 			print('voy a la puerta')
-		elif len([elem for elem in black_board if elem in text]) != 0:
+		elif len([elem for elem in black_board if elem in text.data]) != 0:
 			pub_navigate.publish('black_board')
-            pub_system_stat.publish(True)
+			pub_system_stat.publish(True)
 			print('voy a la pizarra')
-		elif len([elem for elem in circle if elem in text]) != 0:
+		elif len([elem for elem in circle if elem in text.data]) != 0:
 			pub_navigate.publish('circle')
-            pub_system_stat.publish(True)
+			pub_system_stat.publish(True)
 			print('voy a al centro')
-        else:
-            print("Comprension no entiende")
-            pub_speak(True)
+		else:
+			print("Comprension no entiende")
+			pub_speak(True)
 
-	elif 'stop' in text:
-        pub_navigate('stop')
-        pub_system_stat.publish(True)
+	elif 'stop' in text.data:
+		pub_navigate('stop')
+		pub_system_stat.publish(True)
 		print('stop')
-    else:
-        print("Comprension no entiende")
-        pub_speak(True)
+	else:
+		print("Comprension no entiende")
+		pub_speak(True)
 
 
 

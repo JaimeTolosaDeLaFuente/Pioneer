@@ -1,66 +1,68 @@
 #!/usr/bin/env python
 import rospy
 import sys
-from std_msgs.msg import String
+from std_msgs.msg import String,Bool
 import speech_recognition as sr
 from gtts import gTTS
 import pyglet
 import os
-import time
 from scipy.io import wavfile
 import pygame
 from rosarnl.srv import *
 #faces
-import pcl
+#import pcl
 import struct
 import ctypes
+import time, threading
 
 from sensor_msgs.msg import PointCloud, PointCloud2, PointField
 import sensor_msgs.point_cloud2 as pc2
 
 
 activate = True
+pygame.mixer.init()
 
 # Create the publisher to publish the topic with the next goal
 pub_speach_recognition = rospy.Publisher('speak_node/activate_speach_recognition', Bool, queue_size=10)
 pub_system_stat = rospy.Publisher('speak_node/speak_stat', Bool, queue_size=10)
 
 def activate_timer():
-    global activate
-    activate = True
+	global activate
+	activate = True
 
 
 def face_callback(data):
-    global activate
-    #Cuando llega una cara te dice que hables y pasa a escuchar
-    if activate = True:
-        if data == True:
-            activate = False
-            pub_system_stat.publish(False)   #Desactiva envio de datos de detection
-            timer = Timer(2, activate_timer)  #En dos segundo se reactia "activate"
-            print("Speak: Te escucho")
-            speak("Te escucho")
-            pub_speach_recognition.publish(True)
+	global activate
+	#Cuando llega una cara te dice que hables y pasa a escucharp
+	print(data.data)
+	if activate == True:
+		if data.data == True:
+			activate = False
+			pub_system_stat.publish(False)   #Desactiva envio de datos de detection
+			threading.Timer(2,activate_timer).start() #En dos segundo se reactia "activate"
+			print("Speak: Te escucho")
+			speak("I hear you")
+			pub_speach_recognition.publish(True)
 
 
 def say_comprension_callback():
-    #Cuando no entiende lo que has dicho
-    print("Speak: No te he entendido, repite")
-    speak("No te he entendido, repite")
-    pub_speach_recognition.publish(True)
+	#Cuando no entiende lo que has dicho
+	print("Speak: No te he entendido, repite")
+	speak("No te he entendido, repite")
+	pub_speach_recognition.publish(True)
 
 def say_navigation_callback(text):
-    speak(text)
+	speak(text)
 
 def speak(text):
 	tts = gTTS(text)
 	filename = '/tmp/temp.mp3'
 	tts.save(filename)
 	#print('HABLA JO PUTA')
-	music = pyglet.media.load(filename)
-	music.play()
+	music = pygame.mixer.music.load(filename)
+	pygame.mixer.music.play()
 
-	time.sleep(music.duration)
+	time.sleep(2)
 	os.remove(filename)
 
 
@@ -73,9 +75,9 @@ def main():
 	print("sale sleep")
 
 	rospy.Subscriber('system_status_node/face', Bool, face_callback)
-    rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)
-    rospy.Subscriber('system_status_node/say_comprension', Bool, say_comprension_callback)
-    rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
+	rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)
+	rospy.Subscriber('system_status_node/say_comprension', Bool, say_comprension_callback)
+	rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
 
 	rospy.spin()
 
