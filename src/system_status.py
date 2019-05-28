@@ -7,15 +7,20 @@ import time
 
 
 state = True
+faces = 0
 
 pub_speak = rospy.Publisher('system_status_node/face', Bool, queue_size=10)
 
 
 def face_cloud_callback(data):
+    global faces
     #Si tiene que detectar, pasa la info
     if state:
-        pub_speak.publish(data.data)
-
+        if faces > 5:
+            pub_speak.publish(data.data)
+            faces = 0
+        else:
+            faces += 1
 
 def spek_stat_callback(data):
     global state
