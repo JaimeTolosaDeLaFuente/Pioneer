@@ -45,14 +45,14 @@ def face_callback(data):
 			pub_speach_recognition.publish(True)
 
 
-def say_comprension_callback():
+def say_comprension_callback(data):
 	#Cuando no entiende lo que has dicho
 	print("Speak: No te he entendido, repite")
 	speak("No te he entendido, repite")
 	pub_speach_recognition.publish(True)
 
 def say_navigation_callback(text):
-	speak(text)
+	speak(text.data)
 
 def speak(text):
 	tts = gTTS(text)

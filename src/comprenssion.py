@@ -22,12 +22,12 @@ black_board = ['Blackboard','blackboard','white board']
 
 pub_speak = rospy.Publisher('/comprension_node/say_comprension', String, queue_size=10)
 
-pub_system_stat = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
+pub_system_stat = rospy.Publisher('/comprension_node/comprension_stat', String, queue_size=10)
 
 pub_navigate = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
 
 def understand_callback(text):
-	print(text)
+	print(text.data)
 	if 'go to' in text.data:
 		if  len([elem for elem in door if elem in text.data]) != 0:
 			pub_navigate.publish('door')

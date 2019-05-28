@@ -13,17 +13,17 @@ pub_speak = rospy.Publisher('navigation_node/Say_Navigation',String,queue_size =
 
 
 def state_callback(data):
-    
+
     rospy.loginfo("ARNL path state: " + data.data)
 	if data.data == 'REACHED_GOAL':
         pub_speak.publish('I stop')
 
 def navigation_callback(data):
-    if data == 'stop':
+    if data.data == 'stop':
         rospy.ServiceProxy("/rosarnl_node/stop",Empty) #Debería de funcionar
     else:
-        pub.publish(data)
-        pub.speak('Going to '+data)
+        pub.publish(data.data)
+        pub.speak('Going to ' + data.data)
 
 def main():
 
