@@ -23,7 +23,7 @@ activate = True
 pygame.mixer.init()
 
 # Create the publisher to publish the topic with the next goal
-pub_speach_recognition = rospy.Publisher('speak_node/activate_speach_recognition', Bool, queue_size=10)
+pub_speech_recognition = rospy.Publisher('speak_node/activate_speech_recognition', Bool, queue_size=10)
 pub_system_stat = rospy.Publisher('speak_node/speak_stat', Bool, queue_size=10)
 
 def activate_timer():
@@ -42,14 +42,14 @@ def face_callback(data):
 			threading.Timer(2,activate_timer).start() #En dos segundo se reactia "activate"
 			print("Speak: Te escucho")
 			speak("I hear you")
-			pub_speach_recognition.publish(True)
+			pub_speech_recognition.publish(True)
 
 
-def say_comprension_callback(data):
+def say_comprehension_callback(data):
 	#Cuando no entiende lo que has dicho
 	print("Speak: No te he entendido, repite")
 	speak("No te he entendido, repite")
-	pub_speach_recognition.publish(True)
+	pub_speech_recognition.publish(True)
 
 def say_navigation_callback(text):
 	speak(text.data)
@@ -76,8 +76,8 @@ def main():
 
 	rospy.Subscriber('system_status_node/face', Bool, face_callback)
 	rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)
-	rospy.Subscriber('system_status_node/say_comprension', Bool, say_comprension_callback)
-	rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
+	rospy.Subscriber('system_status_node/say_comprehension', Bool, say_comprehension_callback)
+	rospy.Subscriber('speech_recognition_node/speech_recognition_error', Bool, say_comprehension_callback)
 
 	rospy.spin()
 

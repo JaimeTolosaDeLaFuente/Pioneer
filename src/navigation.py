@@ -2,13 +2,13 @@ import rospy
 import sys
 import os
 import time
-import rosarnl.srv import *
+from rosarnl.srv import *
 from std_msgs.msg import String
 from std_msgs.msg import Empty
 #from Pionner.msg import Navigate_Comprenssion
 
 
-pub = rospy.Publisher('/navigation_node/goalname',String,queue_size = 10)
+pub = rospy.Publisher('navigation_node/goalname',String,queue_size = 10)
 pub_speak = rospy.Publisher('navigation_node/Say_Navigation',String,queue_size = 10)
 
 
@@ -21,6 +21,7 @@ def state_callback(data):
 def navigation_callback(data):
     if data.data == 'stop':
         rospy.ServiceProxy("/rosarnl_node/stop",Empty) #Debería de funcionar
+        pub.speak('Going stop')
     else:
         pub.publish(data.data)
         pub.speak('Going to ' + data.data)
@@ -36,7 +37,7 @@ def main():
 
     rospy.Subscriber('rosarnl_node/arnl_path_state', String, state_callback)
 
-    rospy.Subscriber('comprenssion_node/Navigate_Comprenssion',Navigate_Comprenssion,navigation_callback)
+    rospy.Subscriber('comprenssion_node/goalname', String ,navigation_callback)
     #Return control to Ros
     rospy.spin()
 

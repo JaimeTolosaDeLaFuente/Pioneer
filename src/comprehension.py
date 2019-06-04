@@ -20,11 +20,11 @@ black_board = ['Blackboard','blackboard','white board']
 
 
 
-pub_speak = rospy.Publisher('/comprension_node/say_comprension', String, queue_size=10)
+pub_speak = rospy.Publisher('/comprehension_node/say_comprehension', String, queue_size=10)
 
-pub_system_stat = rospy.Publisher('/comprension_node/comprension_stat', String, queue_size=10)
+pub_system_stat = rospy.Publisher('/comprehension_node/comprehension_stat', String, queue_size=10)
 
-pub_navigate = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
+pub_navigate = rospy.Publisher('/comprehension_node/goalname', String, queue_size=10)
 
 def understand_callback(text):
 	print(text.data)
@@ -42,27 +42,27 @@ def understand_callback(text):
 			pub_system_stat.publish(True)
 			print('voy a al centro')
 		else:
-			print("Comprension no entiende")
-			pub_speak(True)
+			print("comprehension no entiende")
+			pub_speak.publish(True)
 
 	elif 'stop' in text.data:
 		pub_navigate('stop')
 		pub_system_stat.publish(True)
 		print('stop')
 	else:
-		print("Comprension no entiende")
-		pub_speak(True)
+		print("comprehension no entiende")
+		pub_speak.publish(True)
 
 
 
 def main():
 	global rospy
 
-	rospy.init_node('comprension_node', anonymous=True)
+	rospy.init_node('comprehension_node', anonymous=True)
 
 	rospy.sleep(1)
 
-	rospy.Subscriber('speach_recognition_node/activate_speach', String, understand_callback)
+	rospy.Subscriber('speech_recognition_node/activate_speech', String, understand_callback)
 
 	rospy.spin()
 

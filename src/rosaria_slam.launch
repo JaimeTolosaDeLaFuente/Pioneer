@@ -1,18 +1,18 @@
 <launch>
-  
+
 
   <!-- System stat -->
   <node name="system_status" pkg="Pionner_practica" type="system_status">
 
 
-  <!-- Detection 
+  <!-- Detection
   <node name="detection" pkg="Pionner_practica" type="detection">
   -->
   <!-- Speak -->
   <node name="speak" pkg="Pionner_practica" type="speak">
 
-  <!-- Speach recognition -->
-  <node name="speach_recognition" pkg="Pionner_practica" type="speach_recognition">
+  <!-- speech recognition -->
+  <node name="speech_recognition" pkg="Pionner_practica" type="speech_recognition">
 
   <!-- Comprension -->
   <node name="comprenssion" pkg="Pionner_practica" type="comprenssion">

@@ -28,7 +28,7 @@ def spek_stat_callback(data):
     state = data.data
 
 
-def comprension_stat_callback(data):
+def comprehension_stat_callback(data):
     global state
     #Pasa a modo True
     state = data.data
@@ -42,7 +42,7 @@ def main():
     #Subscribe to the /face_detector/faces_cloud topic
     rospy.Subscriber('detection_node/faces', Bool, face_cloud_callback)
     rospy.Subscriber('speak_node/spek_stat', Bool, spek_stat_callback)
-    rospy.Subscriber('comprension_node/comprension_stat', String, comprension_stat_callback)
+    rospy.Subscriber('comprehension_node/comprehension_stat', Bool, comprehension_stat_callback)
 
 	#Return control to ROS
 	rospy.spin()
