@@ -33,7 +33,6 @@ def main():
 	rospy.init_node('navigation_node', anonymous=True)
 
 	rospy.sleep(1)
-	print("sale sleep")
 
     rospy.Subscriber('rosarnl_node/arnl_path_state', String, state_callback)
 

@@ -31,13 +31,13 @@ def escucha_micro_callback(data):
 
 		text = r.recognize_google(audio)
 	except sr.UnknownValueError :
-		print("Error 1 - No entiende nada")
+		print("Error 1 - speach recognition can not understand")
 		pub_error.publish(True)
 
 	except sr.RequestError as e:
 		print ("Error 2 - Could not request results from Google Speech Recognition service")
 
-	print('->' + str(text))
+	print('understood ->' + str(text))
 
 
 def main():

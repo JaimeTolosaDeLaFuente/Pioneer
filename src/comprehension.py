@@ -32,17 +32,17 @@ def understand_callback(text):
 		if  len([elem for elem in door if elem in text.data]) != 0:
 			pub_navigate.publish('door')
 			pub_system_stat.publish(True)
-			print('voy a la puerta')
+			print('I go to the door')
 		elif len([elem for elem in black_board if elem in text.data]) != 0:
 			pub_navigate.publish('black_board')
 			pub_system_stat.publish(True)
-			print('voy a la pizarra')
+			print('I go to the blackboard')
 		elif len([elem for elem in circle if elem in text.data]) != 0:
 			pub_navigate.publish('circle')
 			pub_system_stat.publish(True)
-			print('voy a al centro')
+			print('I go to the center')
 		else:
-			print("comprehension no entiende")
+			print("comprehension can not understand")
 			pub_speak.publish(True)
 
 	elif 'stop' in text.data:
@@ -50,7 +50,7 @@ def understand_callback(text):
 		pub_system_stat.publish(True)
 		print('stop')
 	else:
-		print("comprehension no entiende")
+		print("comprehension can not understand")
 		pub_speak.publish(True)
 
 
