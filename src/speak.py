@@ -23,7 +23,7 @@ activate = True
 pygame.mixer.init()
 
 # Create the publisher to publish the topic with the next goal
-pub_speach_recognition = rospy.Publisher('speak_node/activate_speach_recognition', Bool, queue_size=10)
+pub_speech_recognition = rospy.Publisher('speak_node/activate_speech_recognition', Bool, queue_size=10)
 pub_system_stat = rospy.Publisher('speak_node/speak_stat', Bool, queue_size=10)
 
 def activate_timer():
@@ -34,23 +34,21 @@ def activate_timer():
 def face_callback(data):
 	global activate
 	#Cuando llega una cara te dice que hables y pasa a escucharp
-	print(data.data)
 	if activate == True:
 		if data.data == True:
 			activate = False
 			pub_system_stat.publish(False)   #Desactiva envio de datos de detection
 			threading.Timer(2,activate_timer).start() #En dos segundo se reactia "activate"
-			print("Speak: Te escucho")
+			print("Speak: I hear you")
 			speak("I hear you")
-			pub_speach_recognition.publish(True)
-			print('se lo he mandao')
+			pub_speech_recognition.publish(True)
 
 
-def say_comprension_callback(data):
+def say_comprehension_callback(data):
 	#Cuando no entiende lo que has dicho
-	print("Speak: No te he entendido, repite")
-	speak("I can't understand, Can you repeat please?")
-	pub_speach_recognition.publish(True)
+	print("I can't understamd, can you repeat?")
+	speak("I can't understamd, can you repeat?")
+	pub_speech_recognition.publish(True)
 
 def say_navigation_callback(text):
 	print('somos unos triunfadores')
@@ -60,7 +58,6 @@ def speak(text):
 	tts = gTTS(text)
 	filename = '/tmp/temp.mp3'
 	tts.save(filename)
-	#print('HABLA JO PUTA')
 	music = pygame.mixer.music.load(filename)
 	pygame.mixer.music.play()
 
@@ -74,7 +71,6 @@ def main():
 	rospy.init_node('speak_node', anonymous=True)
 
 	rospy.sleep(1)
-	print("sale sleep")
 
 	rospy.Subscriber('system_status_node/face', Bool, face_callback)
 	rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)

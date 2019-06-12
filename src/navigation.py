@@ -4,6 +4,7 @@ import rospy
 import sys
 import os
 import time
+from rosarnl.srv import *
 from std_msgs.msg import String
 from std_msgs.msg import Empty
 #from Pionner.msg import Navigate_Comprenssion
@@ -37,7 +38,6 @@ def main():
 	rospy.init_node('navigation_node', anonymous=True)
 
 	rospy.sleep(1)
-	print("sale sleep")
 
 	rospy.Subscriber('rosarnl_node/arnl_path_state', String, state_callback)
 

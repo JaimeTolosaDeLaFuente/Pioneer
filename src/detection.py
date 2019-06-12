@@ -15,7 +15,7 @@ detect = True
 
 def face_cloud_callback(data):
 	#Comprobar formato
-	print("te veo")
+	print("I can see you")
 	#Si detecta a alguien escucha
 	pub.publish(True)
 

@@ -31,11 +31,10 @@ def speak_stat_callback(data):
 	state = data.data
 
 
-def comprension_stat_callback(data):
-	global state
-	print('ahora si puedo enviar caricas bonica jeje xd lol')
-	#Pasa a modo True
-	state = data.data
+def comprehension_stat_callback(data):
+    global state
+    #Pasa a modo True
+    state = data.data
 
 
 def main():

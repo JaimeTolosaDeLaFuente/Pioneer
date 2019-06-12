@@ -12,8 +12,8 @@ from rosarnl.srv import *
 
 
 # Create the publisher to publish the topic with the next goal
-pub_speach = rospy.Publisher('speach_recognition_node/activate_speach', String, queue_size=10)
-pub_error = rospy.Publisher('speach_recognition_node/speach_recognition_error', Bool, queue_size=10)
+pub_speech = rospy.Publisher('speech_recognition_node/activate_speech', String, queue_size=10)
+pub_error = rospy.Publisher('speech_recognition_node/speech_recognition_error', Bool, queue_size=10)
 
 
 
@@ -39,7 +39,7 @@ def escucha_micro_callback(data):
 		if audio != None:
 			text = r.recognize_google(audio)
 	except sr.UnknownValueError :
-		print("Error 1 - No entiende nada")
+		print("Error 1 - speach recognition can not understand")
 		pub_error.publish(True)
 
 	except sr.RequestError as e:
@@ -52,11 +52,11 @@ def escucha_micro_callback(data):
 
 def main():
 
-	rospy.init_node('speach_recognition_node', anonymous=True)
+	rospy.init_node('speech_recognition_node', anonymous=True)
 	rospy.sleep(1)
 
 	#Subscribe to speak
-	rospy.Subscriber('speak_node/activate_speach_recognition', Bool, escucha_micro_callback)
+	rospy.Subscriber('speak_node/activate_speech_recognition', Bool, escucha_micro_callback)
 
 	rospy.spin()
 
