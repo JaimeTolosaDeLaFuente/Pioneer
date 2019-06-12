@@ -51,7 +51,7 @@ def say_comprehension_callback(data):
 	pub_speech_recognition.publish(True)
 
 def say_navigation_callback(text):
-	print('somos unos triunfadores')
+	print('Speak:' + str(text.data)
 	speak(text.data)
 
 def speak(text):
