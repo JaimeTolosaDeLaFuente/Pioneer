@@ -43,15 +43,17 @@ def face_callback(data):
 			print("Speak: Te escucho")
 			speak("I hear you")
 			pub_speach_recognition.publish(True)
+			print('se lo he mandao')
 
 
 def say_comprension_callback(data):
 	#Cuando no entiende lo que has dicho
 	print("Speak: No te he entendido, repite")
-	speak("No te he entendido, repite")
+	speak("I can't understand, Can you repeat please?")
 	pub_speach_recognition.publish(True)
 
 def say_navigation_callback(text):
+	print('somos unos triunfadores')
 	speak(text.data)
 
 def speak(text):
@@ -76,7 +78,7 @@ def main():
 
 	rospy.Subscriber('system_status_node/face', Bool, face_callback)
 	rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)
-	rospy.Subscriber('system_status_node/say_comprension', Bool, say_comprension_callback)
+	rospy.Subscriber('comprension_node/say_comprension', Bool, say_comprension_callback)
 	rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
 
 	rospy.spin()

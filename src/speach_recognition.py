@@ -20,25 +20,34 @@ pub_error = rospy.Publisher('speach_recognition_node/speach_recognition_error', 
 def escucha_micro_callback(data):
 	r = sr.Recognizer()
 	time.sleep(1)
+	print(data.data)
 	with sr.Microphone() as source:
 		#speak('Say something!')
 		print('Say something!')
-		audio = r.listen(source,10)
+		try:
+			audio = r.listen(source,10)
+		except sr.WaitTimeoutError:
+			print('OHHHH DIOS MIO NO TE HE ENTENDIDO')
+			audio = None
+			pub_error.publish(True)
+
+			
 	print("Okey")
 	text = ''
 	#fs, data = wavfile.read('pruebasonido.wav')
 	try:
-
-		text = r.recognize_google(audio)
+		if audio != None:
+			text = r.recognize_google(audio)
 	except sr.UnknownValueError :
 		print("Error 1 - No entiende nada")
-		pub_error(True)
+		pub_error.publish(True)
 
 	except sr.RequestError as e:
 		print ("Error 2 - Could not request results from Google Speech Recognition service")
 
 	print('->' + str(text))
-	pub_speach.publish(text)
+	if text != '':
+		pub_speach.publish(text)
 
 
 def main():

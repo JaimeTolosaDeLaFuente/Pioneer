@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import sys
-from std_msgs.msg import String
+from std_msgs.msg import String,Bool
 import speech_recognition as sr
 from gtts import gTTS
 import pyglet
@@ -20,9 +20,9 @@ black_board = ['Blackboard','blackboard','white board']
 
 
 
-pub_speak = rospy.Publisher('/comprension_node/say_comprension', String, queue_size=10)
+pub_speak = rospy.Publisher('/comprension_node/say_comprension', Bool, queue_size=10)
 
-pub_system_stat = rospy.Publisher('/comprension_node/comprension_stat', String, queue_size=10)
+pub_system_stat = rospy.Publisher('/comprension_node/comprension_stat', Bool, queue_size=10)
 
 pub_navigate = rospy.Publisher('/comprension_node/goalname', String, queue_size=10)
 
@@ -43,15 +43,15 @@ def understand_callback(text):
 			print('voy a al centro')
 		else:
 			print("Comprension no entiende")
-			pub_speak(True)
+			pub_speak.publish(True)
 
 	elif 'stop' in text.data:
-		pub_navigate('stop')
+		pub_navigate.publish('stop')
 		pub_system_stat.publish(True)
 		print('stop')
 	else:
 		print("Comprension no entiende")
-		pub_speak(True)
+		pub_speak.publish(True)
 
 
 
