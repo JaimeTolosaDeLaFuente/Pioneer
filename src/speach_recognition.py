@@ -23,15 +23,14 @@ def escucha_micro_callback(data):
 	print(data.data)
 	with sr.Microphone() as source:
 		#speak('Say something!')
-		print('Say something!')
+		print('Say something')
 		try:
 			audio = r.listen(source,10)
 		except sr.WaitTimeoutError:
-			print('OHHHH DIOS MIO NO TE HE ENTENDIDO')
 			audio = None
 			pub_error.publish(True)
 
-			
+
 	print("Okey")
 	text = ''
 	#fs, data = wavfile.read('pruebasonido.wav')
@@ -45,7 +44,7 @@ def escucha_micro_callback(data):
 	except sr.RequestError as e:
 		print ("Error 2 - Could not request results from Google Speech Recognition service")
 
-	print('->' + str(text))
+	print('understood ->' + str(text))
 	if text != '':
 		pub_speech.publish(text)
 

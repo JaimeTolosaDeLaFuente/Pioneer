@@ -18,7 +18,6 @@ def face_cloud_callback(data):
 	if state:
 		print(faces)
 		if faces > 2:
-			print('hola caracola')
 			pub_speak.publish(data.data)
 			faces = 0
 		else:
@@ -27,7 +26,6 @@ def face_cloud_callback(data):
 def speak_stat_callback(data):
 	global state
 	#Pasa a modo False
-	print('ya no van a entrar mas caritas bonitas')
 	state = data.data
 
 

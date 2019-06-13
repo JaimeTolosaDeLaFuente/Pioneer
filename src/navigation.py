@@ -18,6 +18,7 @@ def state_callback(data):
 
 	rospy.loginfo("ARNL path state: " + data.data)
 	if data.data == 'REACHED_GOAL':
+		print('Goal reached')
 		pub_speak.publish('Goal reached')
 
 def navigation_callback(data):
@@ -25,11 +26,13 @@ def navigation_callback(data):
 	if data.data == 'stop':
 		rospy.ServiceProxy("/rosarnl_node/stop",Empty) #Debería de funcionar
 		pub_speak.publish('I stop')
+		ptint('stop')
 
 	else:
 		pub.publish(data.data)
 		msg = 'Going to' + str(data.data)
 		pub_speak.publish(msg)
+		print('Going to' + str(data.data))
 
 def main():
 
