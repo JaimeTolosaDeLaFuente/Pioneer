@@ -75,7 +75,7 @@ def main():
 	rospy.Subscriber('system_status_node/face', Bool, face_callback)
 	rospy.Subscriber('navigation_node/say_navigation', String, say_navigation_callback)
 	rospy.Subscriber('comprension_node/say_comprension', Bool, say_comprension_callback)
-	rospy.Subscriber('speach_recognition_node/speach_recognition_error', Bool, say_comprension_callback)
+	rospy.Subscriber('speech_recognition_node/speech_recognition_error', Bool, say_comprension_callback)
 
 	rospy.spin()
 
