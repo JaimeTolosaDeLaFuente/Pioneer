@@ -8,7 +8,7 @@ import os
 import time
 from scipy.io import wavfile
 import pygame
-from rosarnl.srv import *
+#from rosarnl.srv import *
 
 
 # Create the publisher to publish the topic with the next goal
@@ -47,7 +47,7 @@ def escucha_micro_callback(data):
 
 	print('->' + str(text))
 	if text != '':
-		pub_speach.publish(text)
+		pub_speech.publish(text)
 
 
 def main():
